@@ -5,6 +5,10 @@ for (let i = 0; i <= 7; i++) {
 	board[i] = [];
 	for (let j = 0; j <= 7; j++) {
 		board[i][j] = new Position(i, j);
+	}
+}
+for (let i = 0; i <= 7; i++) {
+	for (let j = 0; j <= 7; j++) {
 		board[i][j].moves = getPossibleMoves(board[i][j]);
 	}
 }
@@ -39,6 +43,8 @@ function getPossibleMoves(position) {
 }
 
 function knightMoves(start, destination) {
+	start = board[start[0]][start[1]];
+	destination = board[destination[0]][destination[1]];
 	let queue = [start];
 	start.visited = true;
 	while (queue.length > 0) {
@@ -47,7 +53,7 @@ function knightMoves(start, destination) {
 		if (current.x === destination.x && current.y === destination.y) {
 			let path = [];
 			while (current) {
-				path.push(current);
+				path.push([current.x, current.y]);
 				current = current.parent;
 			}
 			path.reverse();
@@ -63,4 +69,4 @@ function knightMoves(start, destination) {
 	}
 }
 
-console.log(knightMoves(board[0][0], board[1][2]));
+console.log(knightMoves([0, 0], [7, 7]));
